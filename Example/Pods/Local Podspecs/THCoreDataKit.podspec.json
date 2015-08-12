@@ -1,0 +1,25 @@
+{
+  "name": "THCoreDataKit",
+  "version": "0.1.0",
+  "summary": "A short description of THCoreDataKit.",
+  "description": "An optional longer description of THCoreDataKit\n\n* Markdown format.\n* Don't worry about the indent, we strip it!",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/THCoreDataKit",
+  "license": "MIT",
+  "authors": {
+    "Jared Sorge": "jared@jsorge.net"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/THCoreDataKit.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "THCoreDataKit": [
+      "Pod/Assets/*.png"
+    ]
+  }
+}

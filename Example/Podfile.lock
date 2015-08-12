@@ -1,0 +1,14 @@
+PODS:
+  - THCoreDataKit (0.1.0)
+
+DEPENDENCIES:
+  - THCoreDataKit (from `../`)
+
+EXTERNAL SOURCES:
+  THCoreDataKit:
+    :path: ../
+
+SPEC CHECKSUMS:
+  THCoreDataKit: 5dcc37cc8a879aee9c2429d93c2bab70a9e4f68e
+
+COCOAPODS: 0.38.2
