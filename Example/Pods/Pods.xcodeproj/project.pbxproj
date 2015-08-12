@@ -11,7 +11,12 @@
 		44B9F15FA97FE8A82DDDB9BD10AA4C1F /* Pods-THCoreDataKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D362C65A0BE2B763283676C8C953E5A9 /* Pods-THCoreDataKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5F698682110481A3DCDCDA5537F7CB80 /* THCoreDataKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 88F5515F69D0B9EE44374A007BD68CB9 /* THCoreDataKit.bundle */; };
 		6B8D3BD0E9B3C8669CD9C14AA313BAED /* THCoreDataKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 871DDFC4D2A6DF826824A3FB164F2EB3 /* THCoreDataKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6FBEA2499B20B6E244BD8FB501B65574 /* ReplaceMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 030DF49F53B636BC9E1593972E2464F7 /* ReplaceMe.m */; };
+		9301E8FE1B7BA85100066DBB /* THFetchedResultsControllerHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9301E8F81B7BA85100066DBB /* THFetchedResultsControllerHelper.h */; };
+		9301E8FF1B7BA85100066DBB /* THFetchedResultsControllerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9301E8F91B7BA85100066DBB /* THFetchedResultsControllerHelper.m */; };
+		9301E9001B7BA85100066DBB /* THManagedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 9301E8FA1B7BA85100066DBB /* THManagedObject.h */; };
+		9301E9011B7BA85100066DBB /* THManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9301E8FB1B7BA85100066DBB /* THManagedObject.m */; };
+		9301E9021B7BA85100066DBB /* THPersistenceController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9301E8FC1B7BA85100066DBB /* THPersistenceController.h */; };
+		9301E9031B7BA85100066DBB /* THPersistenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9301E8FD1B7BA85100066DBB /* THPersistenceController.m */; };
 		9D4550E72C0645E32189036E23F6345C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE9BD4C6149B265772C6E33975AD8F4 /* Foundation.framework */; };
 		B8BE3355F23240D70E012DB90CDFD398 /* THCoreDataKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1553EAB507B3F65FB617EB1CE546C /* THCoreDataKit-dummy.m */; };
 		C15420DDD11A7304955CB6D4D471FFB3 /* Pods-THCoreDataKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD578AE4C110F0D78233F2C63677B10 /* Pods-THCoreDataKit_Tests-dummy.m */; };
@@ -35,7 +40,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		030DF49F53B636BC9E1593972E2464F7 /* ReplaceMe.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ReplaceMe.m; sourceTree = "<group>"; };
 		0BD578AE4C110F0D78233F2C63677B10 /* Pods-THCoreDataKit_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-THCoreDataKit_Tests-dummy.m"; sourceTree = "<group>"; };
 		22636953D80A8A85B32D82E40BF4D3E5 /* Pods-THCoreDataKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-THCoreDataKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		2EE9BD4C6149B265772C6E33975AD8F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -48,6 +52,12 @@
 		89BF20394BE5F6085CEF456255292207 /* THCoreDataKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "THCoreDataKit-prefix.pch"; sourceTree = "<group>"; };
 		8C95FD9B0278FE8E0AF57CA6F92DEF88 /* Pods-THCoreDataKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-THCoreDataKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		925A33071F7C236C6BDD312DD7E4EB22 /* THCoreDataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = THCoreDataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9301E8F81B7BA85100066DBB /* THFetchedResultsControllerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THFetchedResultsControllerHelper.h; sourceTree = "<group>"; };
+		9301E8F91B7BA85100066DBB /* THFetchedResultsControllerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THFetchedResultsControllerHelper.m; sourceTree = "<group>"; };
+		9301E8FA1B7BA85100066DBB /* THManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THManagedObject.h; sourceTree = "<group>"; };
+		9301E8FB1B7BA85100066DBB /* THManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THManagedObject.m; sourceTree = "<group>"; };
+		9301E8FC1B7BA85100066DBB /* THPersistenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THPersistenceController.h; sourceTree = "<group>"; };
+		9301E8FD1B7BA85100066DBB /* THPersistenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THPersistenceController.m; sourceTree = "<group>"; };
 		9877BCF9904561A802509262F2D6D584 /* Pods-THCoreDataKit_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-THCoreDataKit_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		A5FD2E88F9A3BBDDBAC0E5C4BEC188DF /* THCoreDataKit-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "THCoreDataKit-Private.xcconfig"; sourceTree = "<group>"; };
 		A9FAFC6D9610805AE31AF605AFF53149 /* THCoreDataKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = THCoreDataKit.xcconfig; sourceTree = "<group>"; };
@@ -108,7 +118,12 @@
 		513F97F90CEE41641015E6896111DBC8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				030DF49F53B636BC9E1593972E2464F7 /* ReplaceMe.m */,
+				9301E8F81B7BA85100066DBB /* THFetchedResultsControllerHelper.h */,
+				9301E8F91B7BA85100066DBB /* THFetchedResultsControllerHelper.m */,
+				9301E8FA1B7BA85100066DBB /* THManagedObject.h */,
+				9301E8FB1B7BA85100066DBB /* THManagedObject.m */,
+				9301E8FC1B7BA85100066DBB /* THPersistenceController.h */,
+				9301E8FD1B7BA85100066DBB /* THPersistenceController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -206,7 +221,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9301E9021B7BA85100066DBB /* THPersistenceController.h in Headers */,
 				44B9F15FA97FE8A82DDDB9BD10AA4C1F /* Pods-THCoreDataKit_Tests-umbrella.h in Headers */,
+				9301E9001B7BA85100066DBB /* THManagedObject.h in Headers */,
+				9301E8FE1B7BA85100066DBB /* THFetchedResultsControllerHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +344,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9301E8FF1B7BA85100066DBB /* THFetchedResultsControllerHelper.m in Sources */,
+				9301E9031B7BA85100066DBB /* THPersistenceController.m in Sources */,
+				9301E9011B7BA85100066DBB /* THManagedObject.m in Sources */,
 				C15420DDD11A7304955CB6D4D471FFB3 /* Pods-THCoreDataKit_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,7 +362,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FBEA2499B20B6E244BD8FB501B65574 /* ReplaceMe.m in Sources */,
 				B8BE3355F23240D70E012DB90CDFD398 /* THCoreDataKit-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,7 +444,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/THCoreDataKit/THCoreDataKit-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/THCoreDataKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/THCoreDataKit/THCoreDataKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -489,7 +509,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-THCoreDataKit_Tests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Pods-THCoreDataKit_Tests/Pods-THCoreDataKit_Tests.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -531,7 +551,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/THCoreDataKit/THCoreDataKit-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/THCoreDataKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/THCoreDataKit/THCoreDataKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -557,7 +577,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-THCoreDataKit_Tests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Pods-THCoreDataKit_Tests/Pods-THCoreDataKit_Tests.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;

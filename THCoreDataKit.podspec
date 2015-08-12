@@ -10,29 +10,21 @@
 Pod::Spec.new do |s|
   s.name             = "THCoreDataKit"
   s.version          = "0.1.0"
-  s.summary          = "A short description of THCoreDataKit."
+  s.summary          = "A group of Core Data helper classes"
   s.description      = <<-DESC
-                       An optional longer description of THCoreDataKit
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       You'll find subclasses for NSManagedObject, a persistence controller, and a helper to use as a delegate for an NSFetchedResultsController
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/THCoreDataKit"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://github.com/taphouseio/THCoreDataKit"
   s.license          = 'MIT'
-  s.author           = { "Jared Sorge" => "jared@jsorge.net" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/THCoreDataKit.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { "Jared Sorge" => "contact@taphouse.io" }
+  s.source           = { :git => "https://github.com/taphouseio/THCoreDataKit.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/taphouseio'
 
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '8.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
   s.resource_bundles = {
     'THCoreDataKit' => ['Pod/Assets/*.png']
   }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

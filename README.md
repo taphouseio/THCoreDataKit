@@ -22,7 +22,7 @@ pod "THCoreDataKit"
 
 ## Author
 
-Jared Sorge, jared@jsorge.net
+Jared Sorge, contact@taphouse.io
 
 ## License
 
