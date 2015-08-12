@@ -1,8 +1,8 @@
 {
   "name": "THCoreDataKit",
   "version": "0.2.5",
-  "summary": "A short description of THCoreDataKit.",
-  "description": "An optional longer description of THCoreDataKit\n\n* Markdown format.\n* Don't worry about the indent, we strip it!",
+  "summary": "A group of Core Data helper classes",
+  "description": "You'll find subclasses for NSManagedObject, a persistence controller, and a helper to use as a delegate for an NSFetchedResultsController",
   "homepage": "https://github.com/taphouseio/THCoreDataKit",
   "license": "MIT",
   "authors": {
@@ -10,10 +10,10 @@
   },
   "source": {
     "git": "https://github.com/taphouseio/THCoreDataKit.git",
-    "tag": "0.1.0"
+    "tag": "0.2.5"
   },
   "platforms": {
-    "ios": "7.0"
+    "ios": "8.0"
   },
   "requires_arc": true,
   "source_files": "Pod/Classes/**/*",
