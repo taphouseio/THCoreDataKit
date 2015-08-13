@@ -82,11 +82,16 @@
     switch (type) {
         case NSFetchedResultsChangeInsert:
             if (self.tableView) {
-                if ([self tableViewHasFewerSectionsThanNeeded]) {
-                    [self.tableView insertSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+                UITableViewRowAnimation insertAnimation = self.insertRowAnimation;
+                if (self.insertRowAnimation == nil) {
+                    insertAnimation = UITableViewRowAnimationAutomatic;
                 }
                 
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                if ([self tableViewHasFewerSectionsThanNeeded]) {
+                    [self.tableView insertSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:insertAnimation];
+                }
+                
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:insertAnimation];
             } else if (self.collectionView) {
                 [self.collectionViewObjectChanges addObject:@{@(type): newIndexPath}];
             }
@@ -102,10 +107,15 @@
         
         case NSFetchedResultsChangeDelete:
             if (self.tableView) {
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                UITableViewRowAnimation deleteAnimation = self.insertRowAnimation;
+                if (self.insertRowAnimation == nil) {
+                    deleteAnimation = UITableViewRowAnimationAutomatic;
+                }
+                
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:deleteAnimation];
                 
                 if ([self tableViewHasMoreSectionsThanNeeded]) {
-                    [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:deleteAnimation];
                 }
             } else if (self.collectionView) {
                 [self.collectionViewObjectChanges addObject:@{@(type): indexPath}];
