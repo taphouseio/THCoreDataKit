@@ -12,9 +12,12 @@
 @property (nonatomic, weak)UITableView *tableView;
 @property (nonatomic, weak)UICollectionView *collectionView;
 @property (nonatomic, strong)NSMutableArray *collectionViewObjectChanges;
+@property (nonatomic) UITableViewRowAnimation insertRowAnimation;
+@property (nonatomic) UITableViewRowAnimation deleteRowAnimation;
 @end
 
 @implementation THFetchedResultsControllerHelper
+#pragma mark - API
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView
 {
     self = [super init];
@@ -24,11 +27,13 @@
     return self;
 }
 
-- (instancetype)initWithTableView:(UITableView *)tableView
+- (instancetype)initWithTableView:(UITableView *)tableView insertRowAnimation:(UITableViewRowAnimation)insertAnimation deleteRowAnimation:(UITableViewRowAnimation)deleteAnimation
 {
     self = [super init];
     if (self) {
         self.tableView = tableView;
+        self.insertRowAnimation = insertAnimation;
+        self.deleteRowAnimation = deleteAnimation;
     }
     return self;
 }
@@ -82,16 +87,11 @@
     switch (type) {
         case NSFetchedResultsChangeInsert:
             if (self.tableView) {
-                UITableViewRowAnimation insertAnimation = self.insertRowAnimation;
-                if (self.insertRowAnimation == nil) {
-                    insertAnimation = UITableViewRowAnimationAutomatic;
-                }
-                
                 if ([self tableViewHasFewerSectionsThanNeeded]) {
-                    [self.tableView insertSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:insertAnimation];
+                    [self.tableView insertSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:self.insertRowAnimation];
                 }
                 
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:insertAnimation];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:self.insertRowAnimation];
             } else if (self.collectionView) {
                 [self.collectionViewObjectChanges addObject:@{@(type): newIndexPath}];
             }
@@ -107,15 +107,10 @@
         
         case NSFetchedResultsChangeDelete:
             if (self.tableView) {
-                UITableViewRowAnimation deleteAnimation = self.insertRowAnimation;
-                if (self.insertRowAnimation == nil) {
-                    deleteAnimation = UITableViewRowAnimationAutomatic;
-                }
-                
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:deleteAnimation];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:self.deleteRowAnimation];
                 
                 if ([self tableViewHasMoreSectionsThanNeeded]) {
-                    [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:deleteAnimation];
+                    [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:self.deleteRowAnimation];
                 }
             } else if (self.collectionView) {
                 [self.collectionViewObjectChanges addObject:@{@(type): indexPath}];
