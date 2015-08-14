@@ -38,6 +38,11 @@
     return self;
 }
 
+- (instancetype)initWithTableView:(UITableView *)tableView
+{
+    return [self initWithTableView:tableView insertRowAnimation:UITableViewRowAnimationAutomatic deleteRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 #pragma mark - NSFetchedResultsControllerDelegate
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {

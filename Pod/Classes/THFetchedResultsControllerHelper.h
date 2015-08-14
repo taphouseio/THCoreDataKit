@@ -24,6 +24,15 @@
 - (instancetype)initWithTableView:(UITableView *)tableView insertRowAnimation:(UITableViewRowAnimation)insertAnimation deleteRowAnimation:(UITableViewRowAnimation)deleteAnimation;
 
 /**
+ *  Controls the CRUD operations of a table view backed by an NSFetchedResultsController. Mostly a boilerplate helper. To override the animations for row insertions and deletions, use initWithTableView:insertRowAmimation:deleteRowAnimation. This instance will use UITableViewRowAnimationAutomatic.
+ *
+ *  @param tableView The UITableView to be assigned.
+ *
+ *  @return self
+ */
+- (instancetype)initWithTableView:(UITableView *)tableView;
+
+/**
  *  Controls the CRUD operations of a collection view backed by an NSFetchedResultsController. Mostly a boilerplate helper.
  *
  *  @param tableView The UICollectionView to be assigned.

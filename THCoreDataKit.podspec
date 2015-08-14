@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "THCoreDataKit"
-  s.version          = "0.3.2"
+  s.version          = "0.3.5"
   s.summary          = "A group of Core Data helper classes"
   s.description      = <<-DESC
                        You'll find subclasses for NSManagedObject, a persistence controller, and a helper to use as a delegate for an NSFetchedResultsController

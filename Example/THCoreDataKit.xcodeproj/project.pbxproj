@@ -12,6 +12,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		938D02381B7E334000BAB343 /* THCoreDataKit.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = 938D02371B7E334000BAB343 /* THCoreDataKit.podspec.json */; };
 		C31BD197D032352659CB9632 /* Pods_THCoreDataKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1D1392316361C339AFCC73 /* Pods_THCoreDataKit_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		938D02371B7E334000BAB343 /* THCoreDataKit.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = THCoreDataKit.podspec.json; path = "Pods/Local Podspecs/THCoreDataKit.podspec.json"; sourceTree = "<group>"; };
 		9A1D1392316361C339AFCC73 /* Pods_THCoreDataKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_THCoreDataKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE36D18C0B0F380DD393F6B2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		EECD9E0E12F9494C4B119DF0 /* Pods-THCoreDataKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-THCoreDataKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-THCoreDataKit_Tests/Pods-THCoreDataKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				F36D4E176E3E830EB19ADF90 /* THCoreDataKit.podspec */,
+				938D02371B7E334000BAB343 /* THCoreDataKit.podspec.json */,
 				CE36D18C0B0F380DD393F6B2 /* README.md */,
 				4DEE4B83F8EF5B7FC9849ABE /* LICENSE */,
 			);
@@ -179,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+				938D02381B7E334000BAB343 /* THCoreDataKit.podspec.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
