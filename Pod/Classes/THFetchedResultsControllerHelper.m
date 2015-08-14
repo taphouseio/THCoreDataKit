@@ -14,6 +14,9 @@
 @property (nonatomic, strong)NSMutableArray *collectionViewObjectChanges;
 @property (nonatomic) UITableViewRowAnimation insertRowAnimation;
 @property (nonatomic) UITableViewRowAnimation deleteRowAnimation;
+
+@property (nonatomic, strong) NSMutableArray *insertedIndexPaths;
+@property (nonatomic, strong) NSMutableArray *deletedIndexPaths;
 @end
 
 @implementation THFetchedResultsControllerHelper
@@ -46,6 +49,9 @@
 #pragma mark - NSFetchedResultsControllerDelegate
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+    self.insertedIndexPaths = [NSMutableArray array];
+    self.deletedIndexPaths = [NSMutableArray array];
+    
     if (self.tableView) {
         [self.tableView beginUpdates];
     } else if (self.collectionView) {
@@ -85,6 +91,15 @@
             } completion:nil];
         }
     }
+    
+    NSDictionary *userInfo = @{
+                               FetchedResultsControllerInsertedIndexPathsKey : [self.insertedIndexPaths copy],
+                               FetchedResultsControllerDeletedIndexPathsKey : [self.deletedIndexPaths copy]
+                               };
+    [[NSNotificationCenter defaultCenter] postNotificationName:FetchedResultsControllerUpdatedNotification
+                                                        object:nil
+                                                      userInfo:userInfo
+     ];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -100,6 +115,8 @@
             } else if (self.collectionView) {
                 [self.collectionViewObjectChanges addObject:@{@(type): newIndexPath}];
             }
+        
+            [self.insertedIndexPaths addObject:newIndexPath];
             break;
             
         case NSFetchedResultsChangeUpdate:
@@ -120,6 +137,8 @@
             } else if (self.collectionView) {
                 [self.collectionViewObjectChanges addObject:@{@(type): indexPath}];
             }
+        
+            [self.deletedIndexPaths addObject:indexPath];
             break;
         
         case NSFetchedResultsChangeMove:

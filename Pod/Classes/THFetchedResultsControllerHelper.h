@@ -10,6 +10,13 @@
 @import UIKit;
 @import CoreData;
 
+/**
+ *  This notification will fire when the Fetched Results Controller updates its content. The notification's userInfo dictionary will have 2 keys, for inserted and deleted index paths. The corresponding values will be an array of the affected index paths.
+ */
+extern NSString *const FetchedResultsControllerUpdatedNotification;
+extern NSString *const FetchedResultsControllerInsertedIndexPathsKey;
+extern NSString *const FetchedResultsControllerDeletedIndexPathsKey;
+
 @interface THFetchedResultsControllerHelper : NSObject <NSFetchedResultsControllerDelegate>
 
 /**
