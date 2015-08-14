@@ -8,6 +8,11 @@
 
 #import "THFetchedResultsControllerHelper.h"
 
+NSString *const FetchedResultsControllerUpdatedNotification = @"FetchedResultsControllerUpdatedNotification";
+NSString *const FetchedResultsControllerInsertedIndexPathsKey = @"insertedIndexPaths";
+NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPaths";
+
+
 @interface THFetchedResultsControllerHelper ()
 @property (nonatomic, weak)UITableView *tableView;
 @property (nonatomic, weak)UICollectionView *collectionView;
