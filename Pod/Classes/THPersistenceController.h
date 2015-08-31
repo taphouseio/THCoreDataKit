@@ -37,5 +37,19 @@ typedef void (^InitCallbackBlock)(NSManagedObjectContext *context);
  */
 - (void)save;
 
+/**
+ *  Migrates the persistent store to a new location
+ *
+ *  @param storeURL The full file URL of the new store.
+ *
+ *  @return success or failure.
+ */
 - (BOOL)migrateExistingStoreToNewStoreWithURL:(NSURL *)storeURL;
+
+/**
+ *  Creates a new managed object context with the master context (which is the main queue context) as its parent. The -save method will save any vended contexts as well as the main queue context.
+ *
+ *  @return NSManagedObjectContext
+ */
+- (NSManagedObjectContext *)createBackgroundContext;
 @end

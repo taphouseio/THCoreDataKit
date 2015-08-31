@@ -13,6 +13,7 @@
 @property (nonatomic, readwrite) NSManagedObjectContext *masterContext;
 @property (nonatomic, strong) NSManagedObjectContext *privateContext;
 @property (nonatomic, copy) InitCallbackBlock callbackBlock;
+@property (nonatomic, strong) NSMutableArray *vendedBackgroundContexts;
 @end
 
 static THPersistenceController *_globalPersistenceController = nil;
@@ -40,12 +41,19 @@ static THPersistenceController *_globalPersistenceController = nil;
 
 - (void)save
 {
-    if (![self.privateContext hasChanges] && ![self.masterContext hasChanges]) {
+    if (![self.privateContext hasChanges] && ![self.masterContext hasChanges] && ![self vendedContextsHaveChanges]) {
         return;
     }
     
     [self.masterContext performBlockAndWait:^{
         NSError *saveError = nil;
+        for (NSManagedObjectContext *context in self.vendedBackgroundContexts) {
+            if ([context hasChanges]) {
+                [context save:&saveError];
+                NSAssert(saveError != nil, @"Failed to save vended background context: %@\n%@", saveError.localizedDescription, saveError.userInfo);
+            }
+        }
+        
         [self.masterContext save:&saveError];
         NSAssert(saveError == nil, @"Failed to save on the main thread: %@\n%@", saveError.localizedDescription, saveError.userInfo);
         
@@ -55,6 +63,52 @@ static THPersistenceController *_globalPersistenceController = nil;
             NSAssert(privateError == nil, @"Failed to save on the private thread.", privateError.localizedDescription, privateError.userInfo);
         }];
     }];
+}
+
+- (BOOL)migrateExistingStoreToNewStoreWithURL:(NSURL *)storeURL
+{
+    BOOL success = NO;
+    
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption : @YES,
+                              NSInferMappingModelAutomaticallyOption       : @YES};
+    NSError *migrateError = nil;
+    
+    NSPersistentStoreCoordinator *coordinator = self.privateContext.persistentStoreCoordinator;
+    
+    NSPersistentStore *currentStore = [[coordinator persistentStores] firstObject];
+    [coordinator migratePersistentStore:currentStore
+                                  toURL:storeURL
+                                options:options
+                               withType:NSSQLiteStoreType
+                                  error:&migrateError];
+    
+    if (migrateError) {
+        NSLog(@"Error migrating the store.\n%@", migrateError.localizedDescription);
+    }
+    else {
+        success = YES;
+    }
+    
+    return success;
+}
+
+- (NSManagedObjectContext *)createBackgroundContext
+{
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    context.parentContext = self.masterContext;
+    
+    [self.vendedBackgroundContexts addObject:context];
+    
+    return context;
+}
+
+#pragma mark - Properties
+- (NSMutableArray *)vendedBackgroundContexts
+{
+    if (!_vendedBackgroundContexts) {
+        _vendedBackgroundContexts = [NSMutableArray array];
+    }
+    return _vendedBackgroundContexts;
 }
 
 #pragma mark - Private
@@ -122,30 +176,17 @@ static THPersistenceController *_globalPersistenceController = nil;
     });
 }
 
-- (BOOL)migrateExistingStoreToNewStoreWithURL:(NSURL *)storeURL
+- (BOOL)vendedContextsHaveChanges
 {
-    BOOL success = NO;
+    BOOL changes = NO;
     
-    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption : @YES,
-                              NSInferMappingModelAutomaticallyOption       : @YES};
-    NSError *migrateError = nil;
-    
-    NSPersistentStoreCoordinator *coordinator = self.privateContext.persistentStoreCoordinator;
-    
-    NSPersistentStore *currentStore = [[coordinator persistentStores] firstObject];
-    [coordinator migratePersistentStore:currentStore
-                                  toURL:storeURL
-                                options:options
-                               withType:NSSQLiteStoreType
-                                  error:&migrateError];
-    
-    if (migrateError) {
-        NSLog(@"Error migrating the store.\n%@", migrateError.localizedDescription);
-    }
-    else {
-        success = YES;
+    for (NSManagedObjectContext *context in self.vendedBackgroundContexts) {
+        if ([context hasChanges]) {
+            changes = YES;
+            break;
+        }
     }
     
-    return success;
+    return changes;
 }
 @end

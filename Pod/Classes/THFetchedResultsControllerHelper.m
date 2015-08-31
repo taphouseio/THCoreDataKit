@@ -102,7 +102,7 @@ NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPat
                                FetchedResultsControllerDeletedIndexPathsKey : [self.deletedIndexPaths copy]
                                };
     [[NSNotificationCenter defaultCenter] postNotificationName:FetchedResultsControllerUpdatedNotification
-                                                        object:nil
+                                                        object:self
                                                       userInfo:userInfo
      ];
 }
