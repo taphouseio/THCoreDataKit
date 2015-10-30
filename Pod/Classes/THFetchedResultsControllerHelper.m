@@ -22,6 +22,12 @@ NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPat
 
 @property (nonatomic, strong) NSMutableArray *insertedIndexPaths;
 @property (nonatomic, strong) NSMutableArray *deletedIndexPaths;
+
+@property (nonatomic, strong) NSMutableArray *insertedSections;
+@property (nonatomic, strong) NSMutableArray *deletedSections;
+@property (nonatomic, strong) NSMutableArray *updatedObjects;
+@property (nonatomic, strong) NSMutableArray *movedObjects;
+@property (nonatomic, strong) NSMutableArray *itemSectionCount;
 @end
 
 @implementation THFetchedResultsControllerHelper
@@ -48,7 +54,9 @@ NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPat
 
 - (instancetype)initWithTableView:(UITableView *)tableView
 {
-    return [self initWithTableView:tableView insertRowAnimation:UITableViewRowAnimationAutomatic deleteRowAnimation:UITableViewRowAnimationAutomatic];
+    return [self initWithTableView:tableView
+                insertRowAnimation:UITableViewRowAnimationAutomatic
+                deleteRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -58,7 +66,17 @@ NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPat
     self.deletedIndexPaths = [NSMutableArray array];
     
     if (self.tableView) {
-        [self.tableView beginUpdates];
+        self.insertedSections = [NSMutableArray array];
+        self.deletedSections = [NSMutableArray array];
+        self.movedObjects = [NSMutableArray array];
+        self.updatedObjects = [NSMutableArray array];
+        
+        self.itemSectionCount = [NSMutableArray array];
+        NSInteger sections = [self.tableView numberOfSections];
+        for (int i = 0; i < sections; i++) {
+            NSInteger rows = [self.tableView numberOfRowsInSection:i];
+            [self.itemSectionCount addObject:@(rows)];
+        }
     } else if (self.collectionView) {
         self.collectionViewObjectChanges = [NSMutableArray new];
     }
@@ -67,7 +85,7 @@ NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPat
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     if (self.tableView) {
-        [self.tableView endUpdates];
+        [self replayTableChanges];
     } else if (self.collectionView) {
         if (self.collectionViewObjectChanges.count > 0) {
             [self.collectionView performBatchUpdates:^{
@@ -112,11 +130,6 @@ NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPat
     switch (type) {
         case NSFetchedResultsChangeInsert:
             if (self.tableView) {
-                if ([self tableViewHasFewerSectionsThanNeeded]) {
-                    [self.tableView insertSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:self.insertRowAnimation];
-                }
-                
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:self.insertRowAnimation];
             } else if (self.collectionView) {
                 [self.collectionViewObjectChanges addObject:@{@(type): newIndexPath}];
             }
@@ -126,7 +139,7 @@ NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPat
             
         case NSFetchedResultsChangeUpdate:
             if (self.tableView) {
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.updatedObjects addObject:indexPath];
             } else if (self.collectionView) {
                 [self.collectionViewObjectChanges addObject:@{@(type): indexPath}];
             }
@@ -134,11 +147,6 @@ NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPat
         
         case NSFetchedResultsChangeDelete:
             if (self.tableView) {
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:self.deleteRowAnimation];
-                
-                if ([self tableViewHasMoreSectionsThanNeeded]) {
-                    [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:self.deleteRowAnimation];
-                }
             } else if (self.collectionView) {
                 [self.collectionViewObjectChanges addObject:@{@(type): indexPath}];
             }
@@ -148,7 +156,7 @@ NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPat
         
         case NSFetchedResultsChangeMove:
             if (self.tableView) {
-                [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
+                [self.movedObjects addObject:@{@"oldIndex": indexPath, @"newIndex": newIndexPath}];
             } else if (self.collectionView) {
                 [self.collectionViewObjectChanges addObject:@{@(type): @[indexPath, newIndexPath]}];
             }
@@ -158,28 +166,134 @@ NSString *const FetchedResultsControllerDeletedIndexPathsKey = @"deletedIndexPat
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
-    if (self.tableView) {
-        
-    } else if (self.collectionView) {
-        
+    switch (type) {
+        case NSFetchedResultsChangeInsert: {
+            if (self.tableView) {
+                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:sectionIndex];
+                [self.insertedSections addObject:indexSet];
+            }
+            break;
+        }
+            
+        case NSFetchedResultsChangeDelete: {
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:sectionIndex];
+            [self.deletedSections addObject:indexSet];
+            break;
+        }
+            
+        default: {
+            break;
+        }
     }
 }
 
 #pragma mark - Private
-- (BOOL)tableViewHasFewerSectionsThanNeeded
+- (void)replayTableChanges
 {
-    NSInteger currentNumberOfSections = [self.tableView numberOfSections];
-    NSInteger neededNumberOfSections = [self.tableView.dataSource numberOfSectionsInTableView:self.tableView];
-
-    return neededNumberOfSections > currentNumberOfSections;
+    /*
+     The batches need to be grouped because you can't insert rows into newly inserted sections(?!)
+     
+     Only replay the first stage of changes if they exist, otherwise if the data source has changed the number of rows in a section but not modified the number of sections in the table you don't want to begin/end updating the table view without making it compliant to the data source.
+    */
+    if (self.deletedSections.count > 0 || self.insertedSections.count > 0 || self.deletedIndexPaths.count > 0) {
+        [self replayTableStageOneChanges];
+    }
+    
+    [self replayTableStageTwoChanges];
 }
 
-- (BOOL)tableViewHasMoreSectionsThanNeeded
+- (void)replayTableStageOneChanges
 {
-    NSInteger currentNumberOfSections = [self.tableView numberOfSections];
-    NSInteger neededNumberOfSections = [self.tableView.dataSource numberOfSectionsInTableView:self.tableView];
+    [self.tableView beginUpdates];
     
-    return neededNumberOfSections < currentNumberOfSections;
+    /*
+     Deal with deleting and inserting sections first.
+     
+     These become the equivalent of moving rows around but done in a way that won't cause a "serious application error."
+     */
+    for (NSIndexSet *section in self.deletedSections) {
+        if (![self.insertedSections containsObject:section]) {
+            [self.tableView deleteSections:section withRowAnimation:self.deleteRowAnimation];
+            
+            for (NSDictionary <NSString *, NSIndexPath *> *movedObject in self.movedObjects) {
+                NSIndexPath *oldIndexPath = movedObject[@"oldIndex"];
+                if ([section containsIndex:oldIndexPath.section]) {
+                    NSIndexPath *newIndexPath = movedObject[@"newIndex"];
+                    [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:self.insertRowAnimation];
+                    [self.movedObjects removeObject:movedObject];
+                }
+            }
+        }
+    }
+    
+    for (NSIndexSet *section in self.insertedSections) {
+        if (![self.deletedSections containsObject:section]) {
+            [self.tableView insertSections:section withRowAnimation:self.insertRowAnimation];
+            
+            for (NSDictionary <NSString *, NSIndexPath *> *movedObject in self.movedObjects) {
+                NSIndexPath *newIndexPath = movedObject[@"newIndex"];
+                if ([section containsIndex:newIndexPath.section]) {
+                    NSIndexPath *oldIndexPath = movedObject[@"oldIndex"];
+                    [self.tableView deleteRowsAtIndexPaths:@[oldIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [self.movedObjects removeObject:movedObject];
+                    [self.updatedObjects removeObject:oldIndexPath];
+                }
+            }
+            
+            for (NSIndexPath *insertedIndexPath in self.insertedIndexPaths) {
+                if ([section containsIndex:insertedIndexPath.section]) {
+                    [self.insertedIndexPaths removeObject:insertedIndexPath];
+                }
+            }
+        }
+    }
+    for (NSIndexSet *section in self.insertedSections) {
+        [self.tableView reloadSections:section withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+    if (self.deletedIndexPaths.count > 0) {
+        [self.tableView deleteRowsAtIndexPaths:self.deletedIndexPaths withRowAnimation:self.deleteRowAnimation];
+    }
+    
+    [self.tableView endUpdates];
+}
+
+- (void)replayTableStageTwoChanges
+{
+    [self.tableView beginUpdates];
+    
+    if (self.insertedIndexPaths.count > 0) {
+        [self.tableView insertRowsAtIndexPaths:self.insertedIndexPaths withRowAnimation:self.insertRowAnimation];
+    }
+    
+    for (NSDictionary <NSString *, NSIndexPath *> *movedObject in self.movedObjects) {
+        NSIndexPath *oldIndex = movedObject[@"oldIndex"];
+        NSIndexPath *newIndex = movedObject[@"newIndex"];
+        
+        if (oldIndex == newIndex) {
+            continue;
+        }
+        
+        NSIndexSet *oldIndexSet = [NSIndexSet indexSetWithIndex:oldIndex.section];
+        NSIndexSet *newIndexSet = [NSIndexSet indexSetWithIndex:newIndex.section];
+        BOOL sectionDeleted = [self.deletedSections containsObject:oldIndexSet] || [self.deletedSections containsObject:newIndexSet];
+        if (!sectionDeleted) {
+            NSNumber *oldSectionRows = self.itemSectionCount[oldIndex.section];
+            oldSectionRows = @(([oldSectionRows integerValue] - 1));
+            
+            if ([oldSectionRows integerValue] == 0) {
+                [self.tableView deleteSections:oldIndexSet withRowAnimation:self.deleteRowAnimation];
+            }
+            
+            [self.tableView moveRowAtIndexPath:oldIndex toIndexPath:newIndex];
+        }
+    }
+    
+    for (NSIndexPath *updatedPath in self.updatedObjects) {
+        [self.tableView reloadRowsAtIndexPaths:@[updatedPath] withRowAnimation:self.insertRowAnimation];
+    }
+    
+    [self.tableView endUpdates];
 }
 
 @end
