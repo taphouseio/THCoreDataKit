@@ -45,21 +45,25 @@ static THPersistenceController *_globalPersistenceController = nil;
         return;
     }
     
+    for (NSManagedObjectContext *context in self.vendedBackgroundContexts) {
+        if ([context hasChanges]) {
+            NSError *blockError = nil;
+            [context save:&blockError];
+            NSAssert(blockError == nil, @"Failed to save vended background context: %@\n%@", blockError.localizedDescription, blockError.userInfo);
+        }
+    }
+    
+    __weak typeof(self) weakSelf = self;
     [self.masterContext performBlockAndWait:^{
         NSError *saveError = nil;
-        for (NSManagedObjectContext *context in self.vendedBackgroundContexts) {
-            if ([context hasChanges]) {
-                [context save:&saveError];
-                NSAssert(saveError != nil, @"Failed to save vended background context: %@\n%@", saveError.localizedDescription, saveError.userInfo);
-            }
+        if (weakSelf.masterContext.hasChanges) {
+            [weakSelf.masterContext save:&saveError];
+            NSAssert(saveError == nil, @"Failed to save on the main thread: %@\n%@", saveError.localizedDescription, saveError.userInfo);
         }
         
-        [self.masterContext save:&saveError];
-        NSAssert(saveError == nil, @"Failed to save on the main thread: %@\n%@", saveError.localizedDescription, saveError.userInfo);
-        
-        [self.privateContext performBlock:^{
+        [weakSelf.privateContext performBlock:^{
             NSError *privateError = nil;
-            [self.privateContext save:&privateError];
+            [weakSelf.privateContext save:&privateError];
             NSAssert(privateError == nil, @"Failed to save on the private thread.", privateError.localizedDescription, privateError.userInfo);
         }];
     }];
@@ -145,9 +149,9 @@ static THPersistenceController *_globalPersistenceController = nil;
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:objectModel];
     NSAssert(psc != nil, @"Failed to load the persistent store coordinator.");
     
-    self.masterContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     self.privateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     self.privateContext.persistentStoreCoordinator = psc;
+    self.masterContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     self.masterContext.parentContext = self.privateContext;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
