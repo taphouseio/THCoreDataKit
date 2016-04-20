@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "THCoreDataKit"
-  s.version          = "0.6"
+  s.version          = "0.66"
   s.summary          = "A group of Core Data helper classes"
   s.description      = <<-DESC
                        You'll find subclasses for NSManagedObject, a persistence controller, and a helper to use as a delegate for an NSFetchedResultsController
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/taphouseio/THCoreDataKit.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/taphouseio'
 
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '9.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
