@@ -41,16 +41,16 @@ static THPersistenceController *_globalPersistenceController = nil;
 
 - (void)save
 {
-    if (![self.privateContext hasChanges] && ![self.masterContext hasChanges] && ![self vendedContextsHaveChanges]) {
-        return;
-    }
-    
     for (NSManagedObjectContext *context in self.vendedBackgroundContexts) {
-        if ([context hasChanges]) {
+        [context performBlockAndWait:^{
+            if ([context hasChanges] == NO) {
+                return;
+            }
+            
             NSError *blockError = nil;
             [context save:&blockError];
             NSAssert(blockError == nil, @"Failed to save vended background context: %@\n%@", blockError.localizedDescription, blockError.userInfo);
-        }
+        }];
     }
     
     __weak typeof(self) weakSelf = self;
