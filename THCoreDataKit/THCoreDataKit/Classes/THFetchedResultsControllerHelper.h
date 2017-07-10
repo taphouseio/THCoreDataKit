@@ -42,7 +42,7 @@ extern NSString *const FetchedResultsControllerDeletedIndexPathsKey;
 /**
  *  Controls the CRUD operations of a collection view backed by an NSFetchedResultsController. Mostly a boilerplate helper.
  *
- *  @param tableView The UICollectionView to be assigned.
+ *  @param collectionView The UICollectionView to be assigned.
  *
  *  @return self
  */

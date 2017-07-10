@@ -331,6 +331,7 @@
 				93EC1F991F13E426001B1202 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
