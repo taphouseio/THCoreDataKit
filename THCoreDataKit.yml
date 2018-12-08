@@ -1,0 +1,13 @@
+name: THCoreDataKit
+configFiles:
+  Debug: xcconfigs/Project-Debug.xcconfig
+  Release: xcconfigs/Project-Release.xcconfig
+targets:
+  THCoreDataKit:
+    type: framework
+    platform: iOS
+    sources:
+      - Sources
+    configFiles:
+      Debug: xcconfigs/THCoreDataKit-Debug.xcconfig
+      Release: xcconfigs/THCoreDataKit-Release.xcconfig
