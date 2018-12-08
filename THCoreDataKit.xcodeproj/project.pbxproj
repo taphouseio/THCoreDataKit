@@ -1,0 +1,229 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF_00CC102C79C65472211EEFFFE25B5345 /* THManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FR_28B9D25EE8E0F9DF8C3DA7724A6D503C /* THManagedObject.m */; };
+		BF_047A529EBDE6078488BB1EC4529C266D /* THCoreDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_8D623BDFD7D7107AE1A14A28DDF93FCB /* THCoreDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF_5CABFBCB1AC1152C4E4D533CCA179269 /* THPersistenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = FR_985E8AC99A90048332A1BAF38E816A83 /* THPersistenceController.m */; };
+		BF_A5CC4BC72BE5FF9F6A21307733896225 /* THPersistenceController.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_BBF4BEBA6F032C6DF6E24F8C98AA2D42 /* THPersistenceController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF_B0EB671E87FC28F290C4BF74F1F87AB5 /* THManagedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_A98EE681A683133AEC771901009B3E18 /* THManagedObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF_C52ECCE9F37162EC35C97BDA0CF6376B /* THFetchedResultsControllerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FR_04153F19D424C38C5B82D0F7240485BC /* THFetchedResultsControllerHelper.m */; };
+		BF_E44102EE5BE13B93DD7545B65F486868 /* THFetchedResultsControllerHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_4F4060DD091613B0493E7F2B023681FD /* THFetchedResultsControllerHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FR_04153F19D424C38C5B82D0F7240485BC /* THFetchedResultsControllerHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = THFetchedResultsControllerHelper.m; sourceTree = "<group>"; };
+		FR_1728E458E782031508A7A9313790CCC7 /* Project-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Debug.xcconfig"; sourceTree = "<group>"; };
+		FR_1A5665E23008CE6F4365747B6D04E795 /* THCoreDataKit-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "THCoreDataKit-Debug.xcconfig"; sourceTree = "<group>"; };
+		FR_28B9D25EE8E0F9DF8C3DA7724A6D503C /* THManagedObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = THManagedObject.m; sourceTree = "<group>"; };
+		FR_4F4060DD091613B0493E7F2B023681FD /* THFetchedResultsControllerHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THFetchedResultsControllerHelper.h; sourceTree = "<group>"; };
+		FR_6A6F761FF77A59D665C4EAB7DAC2D322 /* THCoreDataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = THCoreDataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FR_8D623BDFD7D7107AE1A14A28DDF93FCB /* THCoreDataKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THCoreDataKit.h; sourceTree = "<group>"; };
+		FR_985E8AC99A90048332A1BAF38E816A83 /* THPersistenceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = THPersistenceController.m; sourceTree = "<group>"; };
+		FR_A1AD7AA842DF9F4CD8F56F899D5AA79A /* THCoreDataKit-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "THCoreDataKit-Release.xcconfig"; sourceTree = "<group>"; };
+		FR_A98EE681A683133AEC771901009B3E18 /* THManagedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THManagedObject.h; sourceTree = "<group>"; };
+		FR_BBF4BEBA6F032C6DF6E24F8C98AA2D42 /* THPersistenceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THPersistenceController.h; sourceTree = "<group>"; };
+		FR_EE927A28623AC39D98B77FDD2957718B /* Project-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		G_07F12E1BF50E5898894AD69E138B12F7 = {
+			isa = PBXGroup;
+			children = (
+				G_D29821F8A73BB117535AF8C8083F3857 /* Sources */,
+				G_B676C9DAB7CA96E260C5714007DB80DE /* xcconfigs */,
+				G_D1CF4595E6DA2B74BAA3FA9F28DD40B7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G_1CB24F47588A8BCA2180B16DB7C9A655 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FR_4F4060DD091613B0493E7F2B023681FD /* THFetchedResultsControllerHelper.h */,
+				FR_04153F19D424C38C5B82D0F7240485BC /* THFetchedResultsControllerHelper.m */,
+				FR_A98EE681A683133AEC771901009B3E18 /* THManagedObject.h */,
+				FR_28B9D25EE8E0F9DF8C3DA7724A6D503C /* THManagedObject.m */,
+				FR_BBF4BEBA6F032C6DF6E24F8C98AA2D42 /* THPersistenceController.h */,
+				FR_985E8AC99A90048332A1BAF38E816A83 /* THPersistenceController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		G_B676C9DAB7CA96E260C5714007DB80DE /* xcconfigs */ = {
+			isa = PBXGroup;
+			children = (
+				FR_1728E458E782031508A7A9313790CCC7 /* Project-Debug.xcconfig */,
+				FR_EE927A28623AC39D98B77FDD2957718B /* Project-Release.xcconfig */,
+				FR_1A5665E23008CE6F4365747B6D04E795 /* THCoreDataKit-Debug.xcconfig */,
+				FR_A1AD7AA842DF9F4CD8F56F899D5AA79A /* THCoreDataKit-Release.xcconfig */,
+			);
+			path = xcconfigs;
+			sourceTree = "<group>";
+		};
+		G_D1CF4595E6DA2B74BAA3FA9F28DD40B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FR_6A6F761FF77A59D665C4EAB7DAC2D322 /* THCoreDataKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		G_D29821F8A73BB117535AF8C8083F3857 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				FR_8D623BDFD7D7107AE1A14A28DDF93FCB /* THCoreDataKit.h */,
+				G_1CB24F47588A8BCA2180B16DB7C9A655 /* Classes */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		HBP_FE41BA3D50A22438431F34FE08E93234 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF_047A529EBDE6078488BB1EC4529C266D /* THCoreDataKit.h in Headers */,
+				BF_E44102EE5BE13B93DD7545B65F486868 /* THFetchedResultsControllerHelper.h in Headers */,
+				BF_B0EB671E87FC28F290C4BF74F1F87AB5 /* THManagedObject.h in Headers */,
+				BF_A5CC4BC72BE5FF9F6A21307733896225 /* THPersistenceController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		NT_57902594498758716885E3F8B227CD96 /* THCoreDataKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CL_DB5CE9D5BC790CAF626DBFB01141E379 /* Build configuration list for PBXNativeTarget "THCoreDataKit" */;
+			buildPhases = (
+				HBP_FE41BA3D50A22438431F34FE08E93234 /* Headers */,
+				SBP_A7291AD7F51E224C55782B00123AF52E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = THCoreDataKit;
+			productName = THCoreDataKit;
+			productReference = FR_6A6F761FF77A59D665C4EAB7DAC2D322 /* THCoreDataKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		P_6C9922B8B8E8E8004A021B210254953C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1000;
+				TargetAttributes = {
+					NT_57902594498758716885E3F8B227CD96 = {
+						DevelopmentTeam = GECHUE5BZ4;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = CL_E1775E1A09FE34E00B2F24D2A622678F /* Build configuration list for PBXProject "THCoreDataKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = G_07F12E1BF50E5898894AD69E138B12F7;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				NT_57902594498758716885E3F8B227CD96 /* THCoreDataKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		SBP_A7291AD7F51E224C55782B00123AF52E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF_C52ECCE9F37162EC35C97BDA0CF6376B /* THFetchedResultsControllerHelper.m in Sources */,
+				BF_00CC102C79C65472211EEFFFE25B5345 /* THManagedObject.m in Sources */,
+				BF_5CABFBCB1AC1152C4E4D533CCA179269 /* THPersistenceController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BC_26A1C31F4C8E06FFBBB0FF6DBE02FE84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FR_EE927A28623AC39D98B77FDD2957718B /* Project-Release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		BC_81381958CD8214D776867355E8E739FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FR_1728E458E782031508A7A9313790CCC7 /* Project-Debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		BC_C93A0BDE183816EB1C800B745A9AA3D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FR_A1AD7AA842DF9F4CD8F56F899D5AA79A /* THCoreDataKit-Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		BC_E213C212ABF61A4116973F4D44140FB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FR_1A5665E23008CE6F4365747B6D04E795 /* THCoreDataKit-Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CL_DB5CE9D5BC790CAF626DBFB01141E379 /* Build configuration list for PBXNativeTarget "THCoreDataKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC_E213C212ABF61A4116973F4D44140FB0 /* Debug */,
+				BC_C93A0BDE183816EB1C800B745A9AA3D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "";
+		};
+		CL_E1775E1A09FE34E00B2F24D2A622678F /* Build configuration list for PBXProject "THCoreDataKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC_81381958CD8214D776867355E8E739FA /* Debug */,
+				BC_26A1C31F4C8E06FFBBB0FF6DBE02FE84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = P_6C9922B8B8E8E8004A021B210254953C /* Project object */;
+}
